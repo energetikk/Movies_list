@@ -7,7 +7,7 @@ const navItems = [
 
 const Header = () => {
   return (
-    <header className="">
+    <header className="border-2 p-2 border-red-500">
       <Navigation navLinks={navItems} />
     </header>
   );
