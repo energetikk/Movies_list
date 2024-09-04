@@ -13,8 +13,8 @@ body,
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  /* --color-bg: #4e4ec7;
-  --color-active: #0f7dc6; */
+  --color-bg: #4e4ec7;
+  --color-active: #c40d0d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,7 +79,7 @@ h1 {
 
 main {
   min-height: calc(100vh - 85px - 22px);
-  padding-top: 1.5rem;
+  /* padding-top: 1.5rem; */
   padding-bottom: 1.5rem;
 }
 
@@ -114,17 +114,17 @@ input[type="search"] {
   padding: 0.5rem 1rem;
 }
 
-button {
+/* button {
   padding: 0.5rem 1rem;
-}
+} */
 
-.stack {
+/* .stack {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-}
-.login-form {
+} */
+/* .login-form {
   display: grid;
   gap: 1rem;
-}
+} */
