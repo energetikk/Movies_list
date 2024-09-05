@@ -34,7 +34,6 @@ export const registerAction = async (
         error: "Invalid data",
       };
     }
-
     
     const user = await db.user.findUnique({
       where: {
@@ -73,7 +72,7 @@ export const registerAction = async (
     await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirect: false,
+      redirect: true,
     });
 
     return { success: true };

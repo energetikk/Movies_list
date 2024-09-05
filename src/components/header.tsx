@@ -9,7 +9,7 @@ const navItems = [
 
 const Header = () => {
   return (
-    <header className="border-2  border-red-500">
+    <header className="border-2 flex justify-end border-red-500">
       <Navigation navLinks={navItems} />
     </header>
   );

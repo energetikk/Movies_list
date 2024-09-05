@@ -2,7 +2,6 @@ import { auth } from "@/configs/auth";
 
 export default async function Profile() {
   const session = await auth();
-
   return (
     <div className="flex flex-col gap-2 bg-red-400">
       <h2>Имя профиля: {session?.user?.name}</h2>

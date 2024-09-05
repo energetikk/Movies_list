@@ -3,12 +3,15 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "../../prisma/prisma";
-import { users } from '../utils/users';
-
+// import { prisma } from "../../prisma/prisma";
+import { db } from "@/lib/db";
+// import type { NextAuthConfig } from "next-auth";
+import bcrypt from "bcryptjs";
+import {formSchemaLogin} from '../lib/zod';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-    adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(db),
+    
     providers: [
         GoogleProvider({
             clientId: process.env.AUTH_GOOGLE_CLIENT_ID,
@@ -20,42 +23,74 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }),
 
         Credentials({
-            credentials: {
-                email: { label: 'email', type: 'email', required: true },
-                password: { label: 'password', type: 'password', required: true },
+            authorize: async (credentials) => {
+              const { data, success } = formSchemaLogin.safeParse(credentials);
+      
+              if (!success) {
+                throw new Error("Invalid credentials");
+              }
+      
+              const user = await db.user.findUnique({
+                where: {
+                  email: data.email,
+                },
+              });
+      
+              if (!user || !user.password) {
+                throw new Error("No user found");
+              }
+      
+              const isValid = await bcrypt.compare(data.password, user.password);
+      
+              if (!isValid) {
+                throw new Error("Incorrect password");
+              }
+      
+              return user;
             },
-            async authorize(credentials) {
-                if (!credentials?.email || !credentials.password) return null;
-
-                const currentUser = users.find(user => user.email === credentials.email)
-
-                if (currentUser && currentUser.password === credentials.password) {
-                    const { password, ...userWithoutPass } = currentUser;
-
-                    // return userWithoutPass as User;
-                    return userWithoutPass;
-                }
-
-                return null
-            }
-        })
-    ],
-
+          }),
+        ],
+    
     callbacks: {
-        async authorized({ auth }) {
-            // Проверка аутентификации пользователя
-            return !!auth;
+
+      // async authorized({ auth }) {
+      //     // Проверка аутентификации пользователя
+      //     return !!auth;
+      // },
+
+      jwt({ token, user }) {
+        if (user) {
+          token.role = user.role;
         }
+        return token;
+      },
+      session({ session, token }) {
+        if (session.user) {
+          session.user.role = token.role;
+        }
+        return session;
+      },
     },
-
-
-
-    // ],
-
-
+    session: { strategy: "jwt" },
+    events: {
+        async linkAccount({ user }) {
+          await db.user.update({
+            where: { id: user.id },
+            data: {
+              emailVerified: new Date(),
+            },
+          });
+        },
+      },
+    // callbacks: {
+    //     async authorized({ auth }) {
+    //         // Проверка аутентификации пользователя
+    //         return !!auth;
+    //     }
+    // },
 
     // pages: {
-    //     signIn: '/signin'
-    // }
+    //   signIn: "/signin",
+    // },
 }
 )
