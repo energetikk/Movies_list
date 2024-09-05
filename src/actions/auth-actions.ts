@@ -72,7 +72,7 @@ export const registerAction = async (
     await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirect: true,
+      redirect: false,
     });
 
     return { success: true };

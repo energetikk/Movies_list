@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { Providers } from "@/components/Providers/providers";
 import { Header } from '../components/header';
-import { auth } from "@/configs/auth";
+
+import type { Metadata } from "next";
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,6 @@ export default async function RootLayout({
 }>)
 
 {
-
-  const session = await auth();
   return (
     <Providers>
       <html lang="ru">
