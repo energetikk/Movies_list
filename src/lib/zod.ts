@@ -31,3 +31,9 @@ export const formSchemaLogin = z.object({
                 message: "Password must be less than 12 characters.",
             })
 })
+
+export const formSchemaKeyword = z.object({
+    keyword: z.string().min(1, {
+        message: "keyword must be at least empty characters.",
+    }),
+})

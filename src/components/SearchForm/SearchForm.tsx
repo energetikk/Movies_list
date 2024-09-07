@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { formSchemaKeyword } from "@/lib/zod";
  
 import { Button } from "@/components/ui/button"
 import {
@@ -14,27 +15,19 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
  
-const wordSchema = z.object({
-    keyword: z.string().min(2, {
-    message: "Keywords must be at least 2 characters.",
-  }),
-})
-
 
 const SearchForm = () => {
-// export function SearchForm() {
 
-    
     const form = useForm({
-        resolver: zodResolver(wordSchema),
+        resolver: zodResolver(formSchemaKeyword),
         defaultValues: {
           keyword: "",
         },
       })
 
-    function onSubmit() {
-        console.log('asdasd')
-      }
+async function onSubmit(values: z.infer<typeof formSchemaKeyword>) {
+    console.log('asdasd')
+  }
     
  
   return (
@@ -45,9 +38,9 @@ const SearchForm = () => {
           name="keyword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>keyword</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="введите ключевое слово.." {...field} />
               </FormControl>
               <FormDescription>
                 <p className="">

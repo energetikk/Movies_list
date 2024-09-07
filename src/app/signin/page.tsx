@@ -41,7 +41,8 @@ export default function FormLogin() {
       if (response.error) {
         setError(response.error);
       } else {
-        router.push("/profile");
+        router.push("/films");
+        router.refresh()
       }
     });
   }

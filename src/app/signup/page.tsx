@@ -42,7 +42,8 @@ export default function FormRegister() {
       if (response.error) {
         setError(response.error);
       } else {
-        router.push("/films");
+        router.push("/");
+        router.refresh()
       }
     });
   }

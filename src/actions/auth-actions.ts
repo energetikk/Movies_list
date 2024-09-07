@@ -13,6 +13,7 @@ export const loginAction = async (values: z.infer<typeof formSchemaLogin>) => {
     await signIn("credentials", {
       email: values.email,
       password: values.password,
+      redirectTo: '/',
       redirect: false,
     });
     return { success: true };
@@ -73,6 +74,7 @@ export const registerAction = async (
       email: data.email,
       password: data.password,
       redirect: false,
+      redirectTo: '/',
     });
 
     return { success: true };

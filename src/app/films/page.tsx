@@ -4,7 +4,7 @@ import  SearchForm  from '@/components/SearchForm/SearchForm';
 export default function Films() {
   return (
     <>
-      <SearchForm />
+      {/* <SearchForm /> */}
       <MoviesCardList />
     </>
   )

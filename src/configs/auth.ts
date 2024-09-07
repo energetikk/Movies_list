@@ -64,24 +64,34 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
         return token;
       },
-      session({ session, token }) {
+      async session({ session, token }) {
         if (session.user) {
           session.user.role = token.role;
         }
         return session;
+        // return {
+        //   ...session,
+        //   user:{
+        //     ...session.user,
+        //     username: token.username
+        //   }
+        // }
+        // return session
       },
     },
+
+    secret: process.env.AUTH_SECRET,
     session: { strategy: "jwt" },
-    events: {
-        async linkAccount({ user }) {
-          await db.user.update({
-            where: { id: user.id },
-            data: {
-              emailVerified: new Date(),
-            },
-          });
-        },
-      },
+    // events: {
+    //     async linkAccount({ user }) {
+    //       await db.user.update({
+    //         where: { id: user.id },
+    //         data: {
+    //           emailVerified: new Date(),
+    //         },
+    //       });
+    //     },
+    //   },
     // callbacks: {
     //     async authorized({ auth }) {
     //         // Проверка аутентификации пользователя
@@ -89,8 +99,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     //     }
     // },
 
-    // pages: {
-    //   signIn: "/signin",
-    // },
+    pages: {
+      signIn: "/signin",
+    },
 }
 )
