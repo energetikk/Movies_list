@@ -1,5 +1,5 @@
 import './movieslist.css';
-import { baseFilms } from '@/utils/users';
+// import { baseFilms } from '@/utils/users';
 import MoviesCard from '../MovieCard/cardMovie';
 import { db } from '@/lib/db';
 
@@ -24,7 +24,7 @@ const MoviesCardList = async () => {
 
   })
  
-  console.log('список фильмов', allFilms)
+  // console.log('список фильмов', allFilms)
 
   return (
     <>

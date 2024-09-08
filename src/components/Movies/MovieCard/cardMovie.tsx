@@ -4,9 +4,10 @@ import './movie.css';
 // import Image from "next/image";
 import Link from 'next/link';
 import {deleteCardFilm} from '@/actions/auth-actions';
+import { auth } from "@/configs/auth";
 
 const MoviesCard = async ({ card }:any) => {
-
+  const session = await auth();
   return (
     <li className="movie">
       <figure className="movies__element">
@@ -21,10 +22,11 @@ const MoviesCard = async ({ card }:any) => {
         </Link>
         <figcaption className="movies__card">
           <p className="movies__card-name">{card.title}</p>
+          {session?.user.role === 'admin' &&
           <form action={deleteCardFilm}>
             <button type="submit" className="w-5 h-5 border-1 rounded-full">D</button>
             <input type="hidden" name='id' value={card.id} />
-          </form>
+          </form>}
         </figcaption>
         <p className="movie__duration">{card.duration}</p>
       </figure>

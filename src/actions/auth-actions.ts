@@ -91,14 +91,13 @@ export const registerAction = async (
 
 export async function createCardFilm(formData: FormData) {
   const session = await auth();
-  console.log(session)
   await db.film.create({
     data: {
       title: formData.get('title') as string,
       image: formData.get('image') as string,
       link: formData.get('link') as string,
       duration: formData.get('duration') as string,
-      authorId: session.user.id as string
+      authorId: session?.user.id as string
     }
   })
 }
@@ -112,3 +111,22 @@ export async function deleteCardFilm(formData: FormData, id: String) {
   })
   revalidatePath('/films');
 }
+
+export async function searchFilms(values: FormData) {
+  const foundFilms = await db.film.findMany({
+    where: {
+        title: {
+          contains: `${values}`
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+  })
+  
+  revalidatePath('/films');
+  // console.log(foundFilms)
+  return foundFilms;
+}
+
+
