@@ -1,11 +1,11 @@
 // export { auth as middleware } from "@/configs/auth";
-// export const config = { matcher: ['/profile', '/protected/:path*'] };
+// export const config = { matcher: ['/profile', '/films'] };
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { auth } from "@/configs/auth";
 
-const protectedRoutes = ["/middleware"];
+const protectedRoutes = ["/middleware", '/films', '/favorite', '/profile' ];
 
 export default async function middleware(request: NextRequest) {
   const session = await auth();

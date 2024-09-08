@@ -1,4 +1,5 @@
 import { auth } from "@/configs/auth";
+import Link from "next/link";
 
 export default async function Profile() {
   const session = await auth();
@@ -8,6 +9,9 @@ export default async function Profile() {
       <h3>Адрес почты: {session?.user?.email}</h3>
       <h3>Срок авторизации: {session?.expires}</h3>
       {session?.user?.image && <img className="h-48 w-48" src={session.user.image} alt="" />}
+      <Link href={'/admin'}>Админка</Link>
+      
     </div>
+    
   );
 }

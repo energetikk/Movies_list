@@ -27,7 +27,8 @@ export default function RootLayout({
  
   return (
     <html lang="ru">
-        <body className={inter.className}>
+        {/* <body className={inter.className}> */}
+        <body className={`${inter.className} bg-gradient-radial from-sky-400 to-blue-800`}>
       <Providers >
           {/* <Header /> */}
           <NavBar /> 

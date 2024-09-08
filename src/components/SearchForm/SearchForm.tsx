@@ -1,3 +1,5 @@
+'use client'
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -26,32 +28,25 @@ const SearchForm = () => {
       })
 
 async function onSubmit(values: z.infer<typeof formSchemaKeyword>) {
-    console.log('asdasd')
+    console.log(values)
   }
     
  
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className=" flex items-center">
         <FormField
           control={form.control}
           name="keyword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>keyword</FormLabel>
               <FormControl>
                 <Input placeholder="введите ключевое слово.." {...field} />
               </FormControl>
-              <FormDescription>
-                <p className="">
-                    Введите название фильма для поиска...
-                </p>
-              </FormDescription>
-              <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="">Submit</Button>
       </form>
     </Form>
   )

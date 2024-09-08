@@ -34,6 +34,6 @@ export const formSchemaLogin = z.object({
 
 export const formSchemaKeyword = z.object({
     keyword: z.string().min(1, {
-        message: "keyword must be at least empty characters.",
+        message: "Введите слово для поиска...",
     }),
 })

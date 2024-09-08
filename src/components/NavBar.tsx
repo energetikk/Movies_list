@@ -9,7 +9,7 @@ const NavBar = async () => {
     const session = await auth();
 
     return (
-        <nav className="border-2 flex justify-end border-red-500">
+        <nav className="flex justify-end pr-5 h-12 items-center">
             {session?.user ? 
             (
                 <ButtonsignOut />)

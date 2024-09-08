@@ -5,8 +5,11 @@ import { signIn } from "@/configs/auth";
 import { db } from "@/lib/db";
 import { formSchemaLogin, formSchemaRegister } from "@/lib/zod";
 import bcrypt from "bcryptjs";
+import { User } from "lucide-react";
 import { AuthError } from "next-auth";
 import { z } from "zod";
+import { auth } from "@/configs/auth";
+import { revalidatePath } from "next/cache";
 
 export const loginAction = async (values: z.infer<typeof formSchemaLogin>) => {
   try {
@@ -85,3 +88,27 @@ export const registerAction = async (
     return { error: "error 500" };
   }
 };
+
+export async function createCardFilm(formData: FormData) {
+  const session = await auth();
+  console.log(session)
+  await db.film.create({
+    data: {
+      title: formData.get('title') as string,
+      image: formData.get('image') as string,
+      link: formData.get('link') as string,
+      duration: formData.get('duration') as string,
+      authorId: session.user.id as string
+    }
+  })
+}
+
+export async function deleteCardFilm(formData: FormData, id: String) {
+  const idfilm = formData.get('id') as string
+  const deleteFilm = await db.film.delete({
+    where: {
+      id: idfilm
+    },
+  })
+  revalidatePath('/films');
+}
