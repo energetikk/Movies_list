@@ -1,9 +1,5 @@
 import { Inter } from "next/font/google";
 import { Providers } from "@/components/Providers/providers";
-// import { SessionProvider } from "next-auth/react";
-// import { Header } from '../components/header';
-import { auth } from "@/configs/auth";
-// import { Navigation } from "../components/navigation";
 import { NavBar } from "../components/NavBar";
 
 import type { Metadata } from "next";
@@ -24,20 +20,15 @@ export default function RootLayout({
 }>)
 
 {
- 
   return (
     <html lang="ru">
-        {/* <body className={inter.className}> */}
         <body className={`${inter.className} bg-gradient-radial from-sky-400 to-blue-800`}>
-      <Providers >
-          {/* <Header /> */}
+        <Providers >
           <NavBar /> 
-          {/* <Navigation navItems={navItems}/> */}
           <main>
             {children}
           </main>
-          {/* <Footer /> */}
-    </Providers>
+        </Providers>
         </body>
       </html>
   );

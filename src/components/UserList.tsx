@@ -1,12 +1,15 @@
 
-const UserList = async ({card}) => {
+const UserList = async ({card}: any) => {
   return (
-    <div>
-    <p className="movies__card-name">{card.name}</p>
-    <p className="movies__card-name">{card.email}</p>
-    <p className="movies__card-name">{card.role}</p>
-    <p className="movies__card-name">{card.createdAt.toDateString()}</p>
-    <p className="movies__card-name">{card.createdAt.toTimeString()}</p>
+    <div className="flex flex-col w-80 border-2 border-green-600 h-24 rounded-xl p-2 text-xs">
+      <p>{`Имя: ${card.name}`}</p>
+      <p>{`Email: ${card.email}`}</p>
+      <div className="flex">
+        <span>Уровень доступа:</span>
+        <p className="text-red-700">{card.role}</p>
+      </div>
+      <p>{card.createdAt.toDateString()}</p>
+      <p>{card.createdAt.toTimeString()}</p>
     </div>
   );
 };

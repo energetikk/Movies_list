@@ -1,7 +1,5 @@
 import MoviesCardList from '@/components//Movies/MoviesCardsList/moviesCardsList';
-// import  SearchForm  from '@/components/SearchForm/SearchForm';
 import SearchInput from '@/components/searchinput';
-import { searchFilms } from '@/actions/auth-actions';
 
 export default function Films({ searchParams } : { searchParams?: { query?: string}}) {
 
