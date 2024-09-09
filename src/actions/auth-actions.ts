@@ -112,7 +112,13 @@ export async function deleteCardFilm(formData: FormData, id: String) {
   revalidatePath('/films');
 }
 
-export async function searchFilms(values: FormData) {
+export async function getMovies() {
+  const getFilms = await db.film.findMany({},
+ )
+  return getFilms;
+}
+
+export async function searchFilms(values: string | number) {
   const foundFilms = await db.film.findMany({
     where: {
         title: {
@@ -125,8 +131,18 @@ export async function searchFilms(values: FormData) {
   })
   
   revalidatePath('/films');
-  // console.log(foundFilms)
   return foundFilms;
+}
+
+export async function getMoviesFav() {
+  const session = await auth();
+  if (!session) return false;
+  const listMovieFav = await db.film.findMany({
+    where: {
+      id: session.user.id
+    }
+  })
+  return listMovieFav;
 }
 
 

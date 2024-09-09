@@ -1,5 +1,3 @@
-// 'use client'
-
 import './movie.css';
 // import Image from "next/image";
 import Link from 'next/link';

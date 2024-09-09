@@ -2,38 +2,26 @@ import './movieslist.css';
 // import { baseFilms } from '@/utils/users';
 import MoviesCard from '../MovieCard/cardMovie';
 import { db } from '@/lib/db';
+import { searchFilm, getMovies } from '@/actions/auth-actions'
 
-const MoviesCardList = async () => {
-
- // const allFilms= await db.film.findMany({
-  //   where: {
-  //     title: data.email,
-  //   },
-  //   include: {
-  //     accounts: true, 
-  //   },
-  const allFilms = await db.film.findMany({
-    // where: {
-    //   title: {
-    //     contains: 'per'
-    //   }
-    // },
-    // orderBy: {
-    //   createdAt: 'desc'
-    // }
-
-  })
+const MoviesCardList = async ({query}:{query: string}) => {
+// const findmovie = await searchFilms(query)
+const findmovie = await getMovies()
+  // const allFilms = await db.film.findMany({})
  
-  // console.log('список фильмов', allFilms)
+ const filteredmovies = Array.isArray(findmovie) ? findmovie.filter((movie) => {
+  return movie.title.toLowerCase().includes(query.toLowerCase());
+ }) : [];
 
   return (
     <>
       <section className="movies-cards-list">
+        {Array.isArray(findmovie) && filteredmovies.length === 0 &&
+          <p className='text-red-500'>По вашему запросу ничего не найдено!</p>
+        }
         <ul className="movies__preview-list">
-          {allFilms.map((card) => (
-            
+          {filteredmovies.map((card) => (
             <MoviesCard key={card.id} card={card} id={card.id} />
-            
           ))}
         </ul>
       </section>
