@@ -3,8 +3,7 @@ services:
   db:
     image: postgres:15-alpine
     environment:
-      POSTGRESS_PASSWORD: postgres
-      MONGO_INITDB_DATABASE: mypass
+      POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
     volumes:

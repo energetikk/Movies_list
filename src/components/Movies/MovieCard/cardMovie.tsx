@@ -7,6 +7,9 @@ import { Trash, Heart } from 'lucide-react';
 
 const MoviesCard = async ({ card }:any) => {
   const session = await auth();
+
+
+  
   return (
     <li className="movie">
       <figure className="movies__element">
