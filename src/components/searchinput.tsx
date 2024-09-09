@@ -1,7 +1,6 @@
  'use client'
 
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
@@ -21,12 +20,10 @@ const SearchInput = () => {
   }
       
   return (
-   <div className="border rounded-lg w-1/4 flex items-center justify-center">
-    <Input onChange={(e) => {handleSearch(e.target.value)}} type="text" placeholder="Поиск..." className="border-none" />
-    <Button variant="ghost" size="icon">
-        <Search />
-        <span className="sr-only">Search Button</span>
-    </Button>
+   <div className="relative flex flex-1 flex-shrink-0">
+    <label htmlFor="serch" className="sr-only">Поиск по базе фильмов:</label>
+      <Input onChange={(e) => {handleSearch(e.target.value)}} type="text" placeholder="Поиск..." className="peer block w-1/2 py-[9px] pl-10 rounded-md border border-grey-200" />
+      <Search className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-fo:text-gray-800"/>
    </div>
   )
 }

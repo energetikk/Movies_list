@@ -5,8 +5,8 @@ export default function Films({ searchParams } : { searchParams?: { query?: stri
 
 const query = searchParams?.query || '';
   return (
-    <div>
-      <h2>Поиск по базе фильмов:</h2>
+    <div className='mt-10'>
+      <h2 className='mb-2'>Поиск по базе фильмов:</h2>
       <SearchInput />
       <MoviesCardList query={query}/>
     </div>

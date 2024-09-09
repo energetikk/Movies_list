@@ -1,8 +1,9 @@
 import './movie.css';
 // import Image from "next/image";
 import Link from 'next/link';
-import {deleteCardFilm} from '@/actions/auth-actions';
+import { deleteCardFilm, getMoviesFav } from '@/actions/auth-actions';
 import { auth } from "@/configs/auth";
+import { Trash, Heart } from 'lucide-react';
 
 const MoviesCard = async ({ card }:any) => {
   const session = await auth();
@@ -18,18 +19,26 @@ const MoviesCard = async ({ card }:any) => {
           alt={`Картинка превью фильма: ${card.title}`}
         />
         </Link>
+        
         <figcaption className="movies__card">
           <p className="movies__card-name">{card.title}</p>
           {session?.user.role === 'admin' &&
           <form action={deleteCardFilm}>
-            <button type="submit" className="w-5 h-5 border-1 rounded-full">D</button>
+            <button type="submit" className='bg-transparent'><Trash  color="#e63333"/></button>
             <input type="hidden" name='id' value={card.id} />
           </form>}
+          
+
+          <form action={getMoviesFav}>
+            <button type="submit" className='bg-transparent'><Heart size={20} /></button>
+            <input type="hidden" name='id' value={card.id} />
+          </form>
+
+            
         </figcaption>
         <p className="movie__duration">{card.duration}</p>
       </figure>
     </li>
   );
 };
-
 export default MoviesCard;

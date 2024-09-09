@@ -5,7 +5,6 @@ import { signIn } from "@/configs/auth";
 import { db } from "@/lib/db";
 import { formSchemaLogin, formSchemaRegister } from "@/lib/zod";
 import bcrypt from "bcryptjs";
-import { User } from "lucide-react";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import { auth } from "@/configs/auth";
@@ -102,7 +101,7 @@ export async function createCardFilm(formData: FormData) {
   })
 }
 
-export async function deleteCardFilm(formData: FormData, id: String) {
+export async function deleteCardFilm(formData: FormData) {
   const idfilm = formData.get('id') as string
   const deleteFilm = await db.film.delete({
     where: {
