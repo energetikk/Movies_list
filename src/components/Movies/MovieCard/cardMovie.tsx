@@ -16,59 +16,6 @@ const MoviesCard = async ({ card }:any) => {
 
   const isFavorite = isMovieFav ? true : false;
 
- // Переменная для отображения статуса фильма в избранном
-//  const isFavorite = isMovieFav ? true : false;
-
-//  // Функция для добавления или удаления фильма из избранного
-//  const handleToggleFavorite = async () => {
-//    if (isFavorite) {
-//      await toggleFavoriteFilm(session?.user.id, card.id, 'remove'); // Удаляем из избранного
-//    } else {
-//      await toggleFavoriteFilm(session?.user.id, card.id, 'add'); // Добавляем в избранное
-//    }
-   
-//    // Обновляем статус isFavorite после изменения в базе данных
-//    const updatedIsMovieFav = await db.favorite.findFirst({
-//      where: {
-//        userId: session?.user.id,
-//        filmId: card.id
-//      }
-//    });
-
-//    // Обновляем статус isFavorite с учетом изменений в базе данных
-//    setIsFavorite(updatedIsMovieFav ? true : false);
-//  };
-
-
-// const [isFavorite, setIsFavorite] = useState(false); // Состояние для отображения статуса фильма в избранном
-
-// // Функция для добавления или удаления фильма из избранного
-// const toggleFavoriteFilm = async (userId, filmId, action) => {
-//   // Реализация добавления и удаления фильма из избранного в базе данных
-//   // Например, вызов API для отправки запроса на сервер
-// };
-
-// const handleToggleFavorite = async () => {
-//   if (isFavorite) {
-//     await toggleFavoriteFilm(session?.user.id, card.id, 'remove'); // Удаляем из избранного
-//   } else {
-//     await toggleFavoriteFilm(session?.user.id, card.id, 'add'); // Добавляем в избранное
-//   }
-  
-//   // Обновляем статус isFavorite после изменения в базе данных
-//   const updatedIsMovieFav = await db.favorite.findFirst({
-//     where: {
-//       userId: session?.user.id,
-//       filmId: card.id
-//     }
-//   });
-
-//   // Обновляем статус isFavorite с учетом изменений в базе данных
-//   setIsFavorite(updatedIsMovieFav ? true : false);
-// };
-
-
-
   return (
     <li className="movie">
       <figure className="movies__element">

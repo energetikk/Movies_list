@@ -104,13 +104,31 @@ export async function createCardFilm(formData: FormData) {
 
 export async function deleteCardFilm(formData: FormData) {
   const idfilm = formData.get('id') as string
-  const deleteFilm = await db.film.delete({
-    where: {
-      id: idfilm
-    },
-  })
-  revalidatePath('/films');
+
+  try {
+    // Удаляем запись о фильме из таблицы избранного, если она есть
+    await db.favorite.deleteMany({
+      where: {
+        filmId: idfilm,
+      },
+    });
+
+    // Удаление фильма из таблицы film
+    const deleteFilm = await db.film.delete({
+      where: {
+        id: idfilm,
+      },
+    })
+    revalidatePath('/films');
+
+    return deleteFilm;
+  } catch (error) {
+    // Обработка ошибки
+    console.error('Error deleting film:', error);
+    return null;
+  }
 }
+
 
 export async function getMovies() {
   const getFilms = await db.film.findMany({},
