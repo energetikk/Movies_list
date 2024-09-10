@@ -3,7 +3,7 @@
 
 import { signIn } from "@/configs/auth";
 import { db } from "@/lib/db";
-import { formSchemaLogin, formSchemaRegister } from "@/lib/zod";
+import { formSchemaLogin, formSchemaRegister, formSchemaAddFilm } from "@/lib/zod";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { z } from "zod";
@@ -88,18 +88,41 @@ export const registerAction = async (
   }
 };
 
-export async function createCardFilm(formData: FormData) {
-  const session = await auth();
-  await db.film.create({
-    data: {
-      title: formData.get('title') as string,
-      image: formData.get('image') as string,
-      link: formData.get('link') as string,
-      duration: formData.get('duration') as string,
-      authorId: session?.user.id as string
-    }
-  })
-  revalidatePath('/films');
+// export async function createCardFilm(formData: FormData) {
+// export async function createCardFilm(values: z.infer<typeof formSchemaAddFilm>) {
+//   const session = await auth();
+//   await db.film.create({
+//     data: {
+//       // title: values.get('title') as string,
+//       // image: values.get('image') as string,
+//       // link: values.get('link') as string,
+//       // duration: values.get('duration') as string,
+//       title: values.title,
+//       image: values.image,
+//       link: values.link,
+//       duration: values.duration,
+//       authorId: session?.user.id as string
+//     }
+//   })
+//   revalidatePath('/films');
+// }
+export async function createCardFilm(values: z.infer<typeof formSchemaAddFilm>) {
+  try {
+    const session = await auth();
+    await db.film.create({
+      data: {
+        title: values.title,
+        image: values.image,
+        link: values.link,
+        duration: values.duration,
+        authorId: session?.user.id as string
+      }
+    });
+    revalidatePath('/films');
+  } catch (error) {
+    console.error('An error occurred while creating the film card:', error);
+    return { error: 'An error occurred while creating the film card' };
+  }
 }
 
 export async function deleteCardFilm(formData: FormData) {
@@ -129,7 +152,6 @@ export async function deleteCardFilm(formData: FormData) {
   }
 }
 
-
 export async function getMovies() {
   const getFilms = await db.film.findMany({},
  )
@@ -154,19 +176,22 @@ export async function searchFilms(values: string | number) {
 
 export async function getMoviesFav() {
   const session = await auth();
+  console.log(session)
+  
   if (!session) return false;
-  const listMovieFav = await db.film.findMany({
+  const listmoviefav = await db.favorite.findMany({
     where: {
-      id: session.user.id
+      userId: session.user.id
+    },
+    select: {
+      film: true
     }
   })
-  return listMovieFav;
+  // revalidatePath('/favorite');
+  console.log(listmoviefav)
+  
+  return listmoviefav;
 }
-
-
-
-
-
 
 export async function addMovieFav(formData: FormData) {
   const session = await auth();

@@ -1,9 +1,10 @@
 import './movieslist.css';
 import MoviesCard from '../MovieCard/cardMovie';
-import { getMovies } from '@/actions/auth-actions'
+import { getMovies } from '@/actions/auth-actions';
 
 const MoviesCardList = async ({ query }: { query: string }) => {
-  const findmovie = await getMovies()
+  const findmovie = await getMovies();
+  // console.log(findmovie)
 
   const filteredmovies = Array.isArray(findmovie) ? findmovie.filter((movie) => {
     return movie.title.toLowerCase().includes(query.toLowerCase());

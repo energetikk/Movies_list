@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { Trash, Heart } from 'lucide-react';
 import Image from 'next/image';
 
-const MoviesCard = async ({ card }:any) => {
+const MoviesCardFav = async ({ card }:any) => {
   const session = await auth();
   const isMovieFav = await db.favorite.findFirst({
     where: {
@@ -20,10 +20,10 @@ const MoviesCard = async ({ card }:any) => {
   return (
     <li className="movie">
       <figure className="movies__element">
-        <Link href={card.link} target='_blank'>
+        <Link href={card.film.link} target='_blank'>
         <img
           className="movies-card-image"
-          src={card.image}
+          src={card.film.image}
           // width={200}
           // height={140}
           alt={`Картинка превью фильма: ${card.title}`}
@@ -49,4 +49,4 @@ const MoviesCard = async ({ card }:any) => {
     </li>
   );
 };
-export default MoviesCard;
+export default MoviesCardFav;

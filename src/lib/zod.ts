@@ -37,3 +37,21 @@ export const formSchemaKeyword = z.object({
         message: "Введите слово для поиска...",
     }),
 })
+
+export const formSchemaAddFilm = z.object({
+    title: z.string().min(1, {
+        message: "Введите название фильма",
+    }),
+
+    image: z.string().min(1, {
+        message: "Вставьте ссылку на фильм",
+    }),
+
+    link: z.string().min(1, {
+        message: "Вставьте ссылку на фильм",
+    }),
+
+    duration: z.string().min(1, {
+        message: "Укажите длительность фильма в минутах",
+    }),
+})

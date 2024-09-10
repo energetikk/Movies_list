@@ -8,6 +8,7 @@ import { z } from "zod";
 import { formSchemaRegister } from "@/lib/zod";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -16,7 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input";
 import { registerAction } from "@/actions/auth-actions";
 
 export default function FormRegister() {

@@ -1,9 +1,18 @@
 import { auth } from "@/configs/auth";
 import { db } from "@/lib/db";
 import { UserList } from '@/components/UserList';
-import { createCardFilm } from '@/actions/auth-actions';
+import FormAddFilm from '@/components/formAddFilm';
+// import { createCardFilm } from '@/actions/auth-actions';
+// import { useState, useTransition } from 'react';
+// import { z } from 'zod';
+// import { formSchemaAddFilm } from "@/lib/zod";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
 
 export default async function Page() {
+
   const session = await auth();
   const allUsers = await db.user.findMany({})
 
@@ -19,16 +28,12 @@ export default async function Page() {
             ))}
           </ul>
         </div>
+
         <div>
           <p className="font-medium mb-4">Добавить новый фильм:</p>
-          <form action={createCardFilm} className="flex flex-col gap-5 w-64">
-            <input type="text" name="title" placeholder="title" />
-            <input type="text" name="link" placeholder="link" />
-            <input type="text" name="image" placeholder="image" />
-            <input type="text" name="duration" placeholder="duration" />
-            <button type="submit">Сохранить</button>
-          </form>
+          <FormAddFilm />
         </div>
+
       </div>
     )
   }
