@@ -99,6 +99,7 @@ export async function createCardFilm(formData: FormData) {
       authorId: session?.user.id as string
     }
   })
+  revalidatePath('/films');
 }
 
 export async function deleteCardFilm(formData: FormData) {
@@ -143,5 +144,43 @@ export async function getMoviesFav() {
   })
   return listMovieFav;
 }
+
+
+
+
+
+
+export async function addMovieFav(formData: FormData) {
+  const session = await auth();
+  const idfilm = formData.get('id');
+
+  const isFavorite = await db.favorite.findFirst({
+    where: {
+      userId: session?.user.id as string, // ID пользователя из сессии
+      filmId: idfilm as string// ID фильма, который нужно добавить в избранное (передается в теле запроса)
+    }
+  })
+
+    if (isFavorite) {
+      // Если фильм уже в избранном - удаляем его
+      await db.favorite.delete({
+        where: { id: isFavorite.id }
+      })
+      revalidatePath('/films');
+      console.log('Movie removed from favorites:', idfilm);
+    } else {
+      // Если фильма нет в избранном - добавляем его
+      await db.favorite.create({
+        data: {
+          userId: session?.user.id as string, // ID пользователя из сессии
+          filmId: idfilm as string// ID фильма, который нужно добавить в избранное (передается в теле запроса)
+        },
+      })
+      revalidatePath('/films');
+    }
+}
+
+
+
 
 

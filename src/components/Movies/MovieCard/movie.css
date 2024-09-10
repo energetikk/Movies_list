@@ -97,6 +97,10 @@
     background-position: center;
     padding: 0;
   }
+
+  .isfavorite {
+    background-color: green;
+  }
   
   @media screen and (max-width: 1200px) {
     .movie {
