@@ -1,6 +1,4 @@
 import NextAuth from "next-auth";
-// import GoogleProvider from "next-auth/providers/google";
-// import GithubProvider from "next-auth/providers/github";
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
@@ -11,15 +9,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
 
   providers: [
-    // GoogleProvider({
-    //   clientId: process.env.AUTH_GOOGLE_CLIENT_ID,
-    //   clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET
-    // }),
-    // GithubProvider({
-    //   clientId: process.env.AUTH_GITHUB_ID,
-    //   clientSecret: process.env.AUTH_GITHUB_SECRET
-    // }),
-
+    
     Credentials({
       authorize: async (credentials) => {
         const { data, success } = formSchemaLogin.safeParse(credentials);
@@ -68,5 +58,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/signin",
   },
+  trustHost: true,
 }
 )
