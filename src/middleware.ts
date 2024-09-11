@@ -1,6 +1,3 @@
-// export { auth as middleware } from "@/configs/auth";
-// export const config = { matcher: ['/profile', '/films'] };
-
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { auth } from "@/configs/auth";

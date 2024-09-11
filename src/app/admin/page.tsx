@@ -2,14 +2,6 @@ import { auth } from "@/configs/auth";
 import { db } from "@/lib/db";
 import { UserList } from '@/components/UserList';
 import FormAddFilm from '@/components/formAddFilm';
-// import { createCardFilm } from '@/actions/auth-actions';
-// import { useState, useTransition } from 'react';
-// import { z } from 'zod';
-// import { formSchemaAddFilm } from "@/lib/zod";
-// import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
-// import { useForm } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
 
 export default async function Page() {
 
@@ -28,7 +20,6 @@ export default async function Page() {
             ))}
           </ul>
         </div>
-
         <div>
           <p className="font-medium mb-4">Добавить новый фильм:</p>
           <FormAddFilm />

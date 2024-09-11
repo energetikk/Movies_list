@@ -8,7 +8,6 @@ export default async function MoviesFavoriteList() {
   console.log(moviesFav)
 
   return (
-    <>
       <section className="movies-cards-list">
       {Array.isArray(moviesFav) && moviesFav.length === 0 && (
           <p className='text-red-500 w-1/2'>В избранное еще не добавлены фильмы. Перейдите в раздел с фильмами и нажмите сохранить понравившийся фильм что бы не потерять.</p>)}
@@ -18,6 +17,5 @@ export default async function MoviesFavoriteList() {
           ))}
         </ul>
       </section>
-    </>
   );
 };

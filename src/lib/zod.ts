@@ -51,7 +51,13 @@ export const formSchemaAddFilm = z.object({
         message: "Вставьте ссылку на фильм",
     }),
 
-    duration: z.string().min(1, {
-        message: "Укажите длительность фильма в минутах",
+    // duration: z.string().min(1, {
+    //     message: "Укажите длительность фильма в минутах",
+    // }),
+    duration: z.string().refine(value => {
+        const parsedValue = parseInt(value, 10);
+        return !isNaN(parsedValue); // Проверяем, является ли значение числом
+    }, {
+        message: "Длительность фильма должна быть числом",
     }),
 })

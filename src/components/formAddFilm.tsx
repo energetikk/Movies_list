@@ -19,8 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
-
-
 export default function FormAddFilm() {
 
   const [error, setError] = useState<string | null>(null);
@@ -33,10 +31,9 @@ export default function FormAddFilm() {
       title: "",
       image: "",
       link: "",
-      // duration: 1,
+      duration: "",
     },
   })
-
 
   async function onSubmit(values: z.infer<typeof formSchemaAddFilm>) {
     setError(null);
@@ -45,6 +42,7 @@ export default function FormAddFilm() {
       if (response && response.error) {
         setError(response.error);
       } else {
+        form.reset();
         router.push("/admin");
         router.refresh()
       }
@@ -54,7 +52,6 @@ export default function FormAddFilm() {
  return (
     <div>
       <Form {...form}>
-              {/* <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96 "> */}
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96 ">
                 <FormField
                   control={form.control}
