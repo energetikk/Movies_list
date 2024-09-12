@@ -6,11 +6,14 @@ export default async function Home() {
   return (
     <main className="h-full flex flex-col justify-center bg-gradient-radial from-sky-400 to-blue-800">
       <div className="text-center">
-        <span>
+        {session ? (<h2>Добро пожаловать, {session?.user?.name}!</h2>) : (
+        <div>
           <h1 className="text-2xl">Главная страница!</h1>
-          <h3>Адрес почты: {session?.user?.email}</h3>
-        </span>
-          <h2 className="text-xl"> Войдите или зарегестрирутесь, что бы увидеть спсиок фильмов!</h2>
+          <h2 className="text-xl"> Войдите или зарегестрируйтесь, что бы увидеть список фильмов!</h2>
+        </div>)}
+        
+        
+        
       </div>
     </main>
   )

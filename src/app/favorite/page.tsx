@@ -5,8 +5,6 @@ import { getMoviesFav } from '@/actions/auth-actions';
 export default async function MoviesFavoriteList() {
   const moviesFav = await getMoviesFav()
   
-  console.log(moviesFav)
-
   return (
       <section className="movies-cards-list">
       {Array.isArray(moviesFav) && moviesFav.length === 0 && (
