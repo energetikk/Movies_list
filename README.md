@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Приложение "Библиотека фильмов"
 
-## Getting Started
+Проект представляет собой онлайн-сервис поиска фильмов по БД. 
+Есть регистрация, поиск фильмов в БД, добавление фильмов в избранное.
+Наличие ролей: Администратор/Пользователь. Администраторы могут добавлять и удалять фильмы из БД.
 
-First, run the development server:
+### Ссылка на приложение: https://basefilm.vercel.app
+Представлена бета версия приложения размещенная на бесплатном сервере компании Vercel. База данных так же расположена на сервере компании Vercel.
+При регистрации пользователь получает роль "user"
+Для доступа к расширенному функционалу приложения воспользуйтесь учетной записью администратора: 
+Логин: admin@admin.ru
+Пароль: 123321
 
-```bash
+### Особенности и установка приложения на локальной машине:
+
+<summary>Stack:</summary>
+
+-	Next.JS 14 (App Router)
+-	Auth.js v5 + JWT для авторизации
+-	Prisma ORM
+-	PostgreSQL
+-	ShadcnUI
+-	Tailwind CSS
+- Docker
+
+
+<details>
+  
+<summary>Установка и запуск проекта</summary>
+
+
+
+* Клонировать репозиторий и перейти в него в командной строке:
+```
+git clone git@github.com:energetikk/Movies_list.git
+```
+* Установить зависимости:
+```
+npm install
+```
+* Сгенерируйте секретный ключ командой:
+```
+npx auth secret
+```
+* В корне проекта создать файл .env и скопировать туда этот текст:
+```
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgresdata"
+```
+* Сгененрируйте уникальный ключ для Auth командой:
+```
+npx auth secret
+```
+* Запустить базу данныхх в Docker-контейнере командой:
+```
+docker-compose up -d --build
+```
+* Для переноса и формирования таблиц БД запустить последовательно 2 команды:
+```
+npx prisma generate
+```
+```
+npx prisma db push
+```
+* Для отображения графического интерфейса БД запустите команду:
+```
+npx prisma studio
+```
+Интерфейс БД будет доступен по адресу http://localhost:5555/ в дальнейшем через него можно изменить роль Пользователя на Администратора 
+* Запустите проект в режиме разработки командой:
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+* Приложение откроется по ссылке:
+http://localhost:3000/
+
+* Запуск проекта в режиме продакшн командой:
+```
+npm run build
+```
+далее откройте билд проекта командой:
+```
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+</details>
