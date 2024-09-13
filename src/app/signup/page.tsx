@@ -52,7 +52,7 @@ export default function FormRegister() {
     <div className="flex flex-col gap-10 mx-auto h-screen items-center justify-center">
       <h2>Регистрация. Заполните поля и нажмите кнопку Submit</h2>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96 ">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-72 sm:w-96">
           <FormField
             control={form.control}
             name="username"

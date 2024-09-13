@@ -52,7 +52,7 @@ export default function FormAddFilm() {
  return (
     <div>
       <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96 ">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96">
                 <FormField
                   control={form.control}
                   name="title"

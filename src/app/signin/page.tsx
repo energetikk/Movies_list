@@ -51,7 +51,7 @@ export default function FormLogin() {
     <div className="flex mx-auto h-screen flex-col items-center justify-center">
       <h2>Войдите в аккаунт...</h2>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96 ">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-72 sm:w-96">
           <FormField
             control={form.control}
             name="email"
