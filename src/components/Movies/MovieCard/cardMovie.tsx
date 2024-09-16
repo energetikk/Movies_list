@@ -1,6 +1,6 @@
 import './movie.css';
 import Link from 'next/link';
-import { deleteCardFilm, getMoviesFav, addMovieFav } from '@/actions/auth-actions';
+import { deleteCardFilm, addMovieFav } from '@/actions/cards-action';
 import { auth } from "@/configs/auth";
 import { db } from "@/lib/db";
 import { Trash, Heart } from 'lucide-react';

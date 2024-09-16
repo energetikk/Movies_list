@@ -1,6 +1,6 @@
 import './movieslist.css';
 import MoviesCard from '../MovieCard/cardMovie';
-import { getMovies } from '@/actions/auth-actions';
+import { getMovies } from '@/actions/cards-action';
 
 const MoviesCardList = async ({ query }: { query: string }) => {
   const findmovie = await getMovies();

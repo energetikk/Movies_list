@@ -1,6 +1,6 @@
 import './movie.css';
 import Link from 'next/link';
-import { removeMovieFav } from '@/actions/auth-actions';
+import { removeMovieFav } from '@/actions/cards-action';
 import { auth } from "@/configs/auth";
 import { db } from "@/lib/db";
 import { Heart } from 'lucide-react';

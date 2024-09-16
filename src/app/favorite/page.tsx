@@ -1,6 +1,6 @@
 
 import MoviesCardFav from '@/components/Movies/MovieCard/cardMovieFav';
-import { getMoviesFav } from '@/actions/auth-actions';
+import { getMoviesFav } from '@/actions/cards-action';
 
 export default async function MoviesFavoriteList() {
   const moviesFav = await getMoviesFav()
