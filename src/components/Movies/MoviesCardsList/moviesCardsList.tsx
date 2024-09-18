@@ -1,4 +1,4 @@
-import './movieslist.css';
+// import './movieslist.css';
 import MoviesCard from '../MovieCard/cardMovie';
 import { getMovies } from '@/actions/cards-action';
 

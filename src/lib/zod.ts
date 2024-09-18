@@ -50,14 +50,21 @@ export const formSchemaAddFilm = z.object({
     link: z.string().min(1, {
         message: "Вставьте ссылку на фильм",
     }),
-
-    // duration: z.string().min(1, {
-    //     message: "Укажите длительность фильма в минутах",
-    // }),
+    description: z.string().min(10, {
+        message: "Введите описание фильма от 10 до 300 символов",
+    }).max(300, {
+        message: "Описание не может быть больше 300 знаков",
+    }),
     duration: z.string().refine(value => {
         const parsedValue = parseInt(value, 10);
         return !isNaN(parsedValue); // Проверяем, является ли значение числом
     }, {
         message: "Длительность фильма должна быть числом",
+    }),
+})
+
+export const formAvatar = z.object({
+    image: z.string().min(1, {
+        message: "Вставьте ссылку на изображение...",
     }),
 })

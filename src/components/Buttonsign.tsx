@@ -1,10 +1,8 @@
 'use client';
 
-// import { signOut } from "@/configs/auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-// import { Button } from "./ui/button";
 type NavLink = {
     label: string;
     href: string;
@@ -19,17 +17,6 @@ const navLinks = [
     { label: "Избраное", href: "/favorite" },
     { label: "Профиль", href: "/profile" },
 ];
-
-// const ButtonSignOut = () => {
-
-
-//     return (
-//         <Link href="#" onClick={() => signOut({ callbackUrl: "/signin" })}>Выйти</Link>
-// )
-// }
-
-// export default ButtonSignOut;
-
 
 const ButtonSignOut = () => {
     const pathname = usePathname();

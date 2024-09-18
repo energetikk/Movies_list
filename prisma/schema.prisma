@@ -33,6 +33,7 @@ model Film {
   image         String?
   link          String
   duration      String
+  description   String
   author        User     @relation(fields: [authorId], references: [id])
   authorId      String   @default(cuid())
   favorites     Favorite[]

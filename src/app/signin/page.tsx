@@ -78,7 +78,7 @@ export default function FormLogin() {
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isPending}>Submit</Button>
+          <Button type="submit" disabled={isPending}>Войти</Button>
           <div className="flex gap-5">
             <p>Нет учетной записи?</p>
             <span>

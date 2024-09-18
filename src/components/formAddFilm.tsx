@@ -31,6 +31,7 @@ export default function FormAddFilm() {
       image: "",
       link: "",
       duration: "",
+      description: "",
     },
   })
 
@@ -93,6 +94,19 @@ export default function FormAddFilm() {
                 />
                 <FormField
                   control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Описание фильма</FormLabel>
+                      <FormControl>
+                        <Input type="text" placeholder="Описание фильма, от 10 до 300 символов" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="duration"
                   render={({ field }) => (
                     <FormItem>
@@ -104,7 +118,7 @@ export default function FormAddFilm() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" disabled={isPending}>Submit</Button>
+                <Button type="submit" disabled={isPending}>Сохранить фильм</Button>
               </form>
             </Form>
       </div>

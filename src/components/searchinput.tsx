@@ -21,8 +21,6 @@ const SearchInput = () => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* <h2 className='mb-2'>Поиск по базе фильмов:</h2> */}
-      {/* <div className="relative flex flex-1 flex-shrink-0"> */}
       <div className="relative">
         <label htmlFor="serch" className="sr-only">Поиск по базе фильмов:</label>
         <Input onChange={(e) => { handleSearch(e.target.value) }} type="text" placeholder="Поиск..." className="peer block w-72 sm:w-96 py-[9px] pl-10 rounded-md border border-grey-200" />

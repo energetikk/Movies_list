@@ -14,6 +14,7 @@ export async function createCardFilm(values: z.infer<typeof formSchemaAddFilm>) 
           title: values.title,
           image: values.image,
           link: values.link,
+          description: values.description,
           duration: values.duration,
           authorId: session?.user.id as string
         }

@@ -91,7 +91,7 @@ export default function FormRegister() {
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isPending}>Submit</Button>
+          <Button type="submit" disabled={isPending}>Зарегестрироваться</Button>
         </form>
       </Form>
     </div>

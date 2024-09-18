@@ -1,5 +1,6 @@
 import { auth } from "@/configs/auth";
 import Link from "next/link";
+import FormAddAvatar from '@/components/formAddAvatar';
 
 export default async function Profile() {
   const session = await auth();
@@ -11,6 +12,7 @@ export default async function Profile() {
         <h2>Срок авторизации: {session?.expires}</h2>
         {session?.user?.image && <img className="h-48 w-48" src={session.user.image} alt="image profile" />}
         <Link href={'/admin'}>Ссылка для администратора</Link>
+        <FormAddAvatar />
       </div>
     </div>
 

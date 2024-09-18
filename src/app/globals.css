@@ -104,9 +104,9 @@ form {
 }
 
 form button, button {
-  background-color: var(--color-active);
+  /* background-color: var(--color-active); */
   cursor: pointer;
-  color: white;
+  /* color: white; */
   border: none;
 }
 
