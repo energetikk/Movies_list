@@ -17,8 +17,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { auth } from "@/configs/auth";
+import { useSession } from 'next-auth/react';
+
 export default function FormAddAvatar() {
+  
+  const {data: session, update} = useSession();
+  async function updateSession(newImageUrl: string) {
+    await update({
+      ...session,
+      user: {
+ ...session?.user,
+        image: newImageUrl
+      },
+    })
+  }
 
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -37,7 +49,9 @@ export default function FormAddAvatar() {
       const response = await changedAvatar(values);
       if (response && response.error) {
         setError(response.error);
+        
       } else {
+        await updateSession(values.image);
         form.reset();
         router.push("/profile");
         router.refresh()
@@ -48,7 +62,7 @@ export default function FormAddAvatar() {
  return (
     <div>
       <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-96 ">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col w-72 mx-auto">
                 <FormField
                   control={form.control}
                   name="image"
@@ -56,7 +70,7 @@ export default function FormAddAvatar() {
                     <FormItem>
                       <FormLabel>Ссылка на аватар:</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder="Вставьте ссылку на постер фильма..." {...field} />
+                        <Input type="text" placeholder="Вставьте ссылку на изображение..." {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
