@@ -11,11 +11,11 @@ const MoviesCardList = async ({ query }: { query: string }) => {
 
   return (
     <>
-      <section className="movies-cards-list">
+      <section className="movies-cards-list text-center">
         {Array.isArray(findmovie) && findmovie.length === 0 && (
-          <p className='text-red-500'>В библиотеку еще не добавлены фильмы. Обратитесь к администратору.</p>)}
+          <p className='text-red-500 pt-10 px-4'>В библиотеку еще не добавлены фильмы. Обратитесь к администратору.</p>)}
         {Array.isArray(findmovie) && filteredmovies.length === 0 && (
-          <p className='text-red-500'>По вашему запросу ничего не найдено!</p>)}
+          <p className='text-red-500 px-4'>По вашему запросу ничего не найдено!</p>)}
         <ul className="grid-cols-2 sm:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {Array.isArray(findmovie) && filteredmovies.map((card) => (
             <MoviesCard key={card.id} card={card} id={card.id} />
